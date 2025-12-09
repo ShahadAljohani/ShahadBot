@@ -1,0 +1,113 @@
+import os
+import time
+import requests
+import cohere
+from elevenlabs.client import ElevenLabs
+from elevenlabs import play
+import sounddevice as sd
+from scipy.io.wavfile import write as write_wav
+import numpy as np
+import speech_recognition as sr
+
+
+#Replace these with your actual API keys.
+ELEVENLABS_API_KEY = ""
+COHERE_API_KEY = ""
+
+elevenlabs_client = ElevenLabs(api_key=ELEVENLABS_API_KEY)
+cohere_client = cohere.Client(COHERE_API_KEY)
+
+SAMPLE_RATE = 44100 
+RECORD_DURATION = 5
+
+def record_audio(filename="user_input.wav"):
+
+    print(f"Recording for {RECORD_DURATION} seconds...")
+    audio_data = sd.rec(int(RECORD_DURATION * SAMPLE_RATE), samplerate=SAMPLE_RATE, channels=1, dtype='int16')
+    sd.wait()
+    print("Recording stopped.")
+  
+    write_wav(filename, SAMPLE_RATE, audio_data)
+    return filename
+
+def transcribe_audio(audio_file_path: str) -> str:
+    r = sr.Recognizer()
+    with sr.AudioFile(audio_file_path) as source:
+        audio = r.record(source)
+    try:
+        return r.recognize_google(audio)
+    except Exception:
+        return ""
+
+def get_cohere_response(prompt: str) -> str:
+    try:
+        response = cohere_client.chat(
+            model='command-r-plus',
+            message=prompt,
+        )
+        return response.text
+    except Exception:
+        return "Sorry, I couldn't get a response from the model."
+    
+def synthesize_and_play_speech(text, filename="static/audio/response.mp3", play_audio=True):
+    
+    print("Generating and playing speech...")
+    try:
+
+        audio = elevenlabs_client.text_to_speech.convert(
+            text=text,
+            voice_id="dQBE6wgf4bj68cpfkin6",
+            model_id="eleven_multilingual_v2",
+            output_format="mp3_44100_128",
+        )
+        with open(filename, "wb") as f:
+            for chunk in audio:
+                f.write(chunk)
+
+        with open(filename, "rb") as f:
+            play(f.read()) #play sound in CLI 
+
+        return filename
+
+    except Exception as e:
+        print(f"Error generating audio: {e}")
+        return None
+    
+    
+
+def main():
+    """
+    Main function to run the voice chatbot in a command-line interface.
+    """
+    print("--- Voice Chatbot CLI ---")
+    print("Press Ctrl+C to exit.")
+
+    while True:
+        try:
+            audio_file = record_audio()
+            user_text = transcribe_audio(audio_file)
+            print(f"You said: {user_text}")
+
+            if any(word in user_text.lower() for word in ["exit", "bye", "goodbye", "close"]):
+                print("Goodbye! see you next time")
+                break
+
+            if user_text:
+                response_text = get_cohere_response(user_text)
+                print(f"Bot says: {response_text}")
+                synthesize_and_play_speech(response_text)
+            else:
+                print("No clear speech detected. Please try again.")
+
+            
+            os.remove(audio_file)
+
+        except KeyboardInterrupt:
+            print("\nExiting...")
+            break
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            time.sleep(1) 
+
+if __name__ == "__main__":
+    main()
