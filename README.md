@@ -1,6 +1,14 @@
 # ShahadBot
 A terminal-based, voice-enabled chatbot integrated with a Cohere LLM.
 
+Website:
+<img width="1920" height="946" alt="Screenshot (837)" src="https://github.com/user-attachments/assets/da7bfec2-e555-4764-8bf3-d274df4397f0" />
+
+
+CLI:
+
+https://github.com/user-attachments/assets/24abb8aa-5bf5-4f6c-be34-62b091762729
+
 
 ## How to run it on CLI ?
 
@@ -36,6 +44,7 @@ cd path/to/project
 ```
 python shahadbot.py
 ```
+
 
 
 
