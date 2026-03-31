@@ -2,6 +2,6 @@ Flask>=2.3.2
 gunicorn>=21.2.0
 cohere>=5.0.0
 elevenlabs>=2.35.0
-scipy>=1.11.4
+scipy>=1.14.0
 numpy>=1.27.0
 SpeechRecognition>=3.11.0
