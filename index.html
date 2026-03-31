@@ -28,20 +28,17 @@
       height: 400px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;   /* messages start from top */
+      justify-content: flex-start;   
       padding: 20px;
-      overflow-y: auto;              /* scroll enabled */
+      overflow-y: auto;              
       border-radius: 12px;
       margin-bottom: 10px;
       box-sizing: border-box;
       scroll-behavior: smooth;
 
-      /* Firefox scrollbar */
       scrollbar-width: thin;
       scrollbar-color: #316f8a #34657ae1;
     }
-
-    /* WebKit browsers (Chrome, Safari, Edge) */
     #chat-container::-webkit-scrollbar {
       width: 12px;
     }
@@ -164,12 +161,9 @@
     scrollToBottom();
   }
 
-  // ✅ Auto-scroll helper
   function scrollToBottom() {
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
   }
-
-  // ✅ Send message to Flask backend
   async function sendMessage() {
     const text = userInput.value.trim();
     if (!text) return;
@@ -202,8 +196,6 @@
         }
         typeWriter();
       }
-
-      // Play audio if available
       if (data.audio_url) {
         const audio = new Audio(data.audio_url);
         audio.play();
@@ -215,13 +207,10 @@
     }
   }
 
-  // Send when clicking button or pressing Enter
   sendBtn.addEventListener("click", sendMessage);
   userInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") sendMessage();
   });
-
-  // 🎤 Voice recognition when robot is pressed
   robot.addEventListener("click", () => {
     if (!('webkitSpeechRecognition' in window)) {
       alert("Your browser doesn't support speech recognition.");
