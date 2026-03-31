@@ -4,6 +4,7 @@ A terminal-based, voice-enabled chatbot integrated with a Cohere LLM with integr
 Website:
 <img width="1920" height="946" alt="Screenshot (837)" src="https://github.com/user-attachments/assets/da7bfec2-e555-4764-8bf3-d274df4397f0" />
 
+*website won't work unless you include API keys needed at `shahadbot.py` file and run it locally. (floating bot is the mic)
 
 CLI:
 
