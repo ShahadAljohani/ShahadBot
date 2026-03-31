@@ -1,0 +1,8 @@
+Flask==2.3.2
+gunicorn==21.2.0
+cohere==5.0.0
+elevenlabs==0.4.2
+sounddevice==0.4.9
+scipy==1.11.1
+numpy==1.27.5
+SpeechRecognition==3.11.0
