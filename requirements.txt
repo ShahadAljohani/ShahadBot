@@ -2,7 +2,8 @@ Flask==2.3.2
 gunicorn==21.2.0
 cohere==5.0.0
 elevenlabs>=2.0.0
-sounddevice==0.4.9
+sounddevice==0.4.7
 scipy==1.11.1
 numpy==1.27.5
 SpeechRecognition==3.11.0
+python==3.10
