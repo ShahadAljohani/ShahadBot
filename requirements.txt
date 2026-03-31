@@ -1,3 +1,6 @@
 flask
 cohere
 gunicorn
+python-3.11.9
+yanked=1.14.0rc1
+scipy=1.11.1
