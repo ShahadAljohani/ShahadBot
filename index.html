@@ -139,7 +139,7 @@
 
   <div id="chat-container"></div>
    
-  <img id="robot" src="static/webRobot.png" alt="Floating robot" class="robot-float">
+  <img id="robot" src="{{ url_for('static', filename='images/webRobot.png') }}" alt="Floating robot" class="robot-float">
 
   <div id="input-box">
     <input type="text" id="message-input" placeholder="Ask me anything...">
@@ -152,7 +152,6 @@
   const sendBtn = document.getElementById("send-btn");
   const robot = document.getElementById("robot");
 
-  // ✅ Add message to chat
   function addMessage(sender, text) {
     const msg = document.createElement("div");
     msg.classList.add("message", sender === "You" ? "user" : "bot");
