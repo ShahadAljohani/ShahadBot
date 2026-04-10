@@ -1,5 +1,5 @@
 # ShahadBot
-A terminal-based, voice-enabled chatbot integrated with a Cohere LLM with integrated TTS/STT conersation.
+A terminal-based, voice-enabled chatbot integrated with a Cohere LLM with integrated TTS/STT conversation.
 
 ## Website:
 <img width="1920" height="946" alt="Screenshot (837)" src="https://github.com/user-attachments/assets/da7bfec2-e555-4764-8bf3-d274df4397f0" />
@@ -8,7 +8,7 @@ A terminal-based, voice-enabled chatbot integrated with a Cohere LLM with integr
 
 
 ### Want to try it?
-- Use your own API keys from Cohere's webiste + ElevenLabs website
+- Use your own API keys from Cohere's website + ElevenLabs website
 - paste them in `ELEVENLABS_API_KEY = "" ` and ` COHERE_API_KEY = "" ` at shahadbot.py file
 - run it locally in the terminal by typing: python shahadbot.py, then click on the local server ( http://---.-.-.-:---- )
    
